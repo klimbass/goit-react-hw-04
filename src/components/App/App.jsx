@@ -10,7 +10,7 @@ import Loader from "../Loader/Loader";
 import css from "./App.module.css";
 
 export default function App() {
-  const [articles, setArticles] = useState([]);
+  const [images, setImages] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -49,7 +49,7 @@ export default function App() {
   const onSubmit = (newQuery) => {
     setQuery(newQuery);
     setPage(1);
-    setArticles([]);
+    setImages([]);
   };
 
   useEffect(() => {
@@ -61,8 +61,8 @@ export default function App() {
         setIsLoading(true);
         const key = await fetchKey();
         const data = await fetchRequest(query, perPage, page, key);
-        setArticles((prevArticles) => {
-          return [...prevArticles, ...data];
+        setImages((prevImages) => {
+          return [...prevImages, ...data];
         });
       } catch (error) {
         setError(true);
@@ -77,15 +77,12 @@ export default function App() {
     <div className={css.container}>
       <SearchBar onSubmit={onSubmit} />
       {error && <ErrorMessage />}
-      {articles.length > 0 && (
-        <ImageGallery
-          articles={articles}
-          handleModalToggle={handleModalToggle}
-        />
+      {images.length > 0 && (
+        <ImageGallery images={images} handleModalToggle={handleModalToggle} />
       )}
       {isLoading && <Loader />}
 
-      {articles.length > 0 && !isLoading && (
+      {images.length > 0 && !isLoading && (
         <LoadMoreBtn onClick={onClickLoadMoreBtn} />
       )}
 
