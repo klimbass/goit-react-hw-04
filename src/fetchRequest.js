@@ -3,9 +3,9 @@ axios.defaults.baseURL = "https://api.unsplash.com/";
 
 export async function fetchKey() {
   const key = await axios.get(
-    "https://65d7bc4927d9a3bc1d7bb7e2.mockapi.io/links/books"
+    "https://65d7bc4927d9a3bc1d7bb7e2.mockapi.io/contacts"
   );
-  return key.data[0].accessKey;
+  return key.data[0].key;
 }
 
 export async function fetchRequest(searchQuery, perPage, page, key) {
